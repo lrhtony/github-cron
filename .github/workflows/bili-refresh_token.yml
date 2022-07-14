@@ -1,7 +1,9 @@
 name: Refresh Bilibili Token
 
 on:
-  workflow_dispatch
+  schedule:
+    - cron: "28 13 6 */2 *"
+  workflow_dispatch:
 
 jobs:
   refresh_bilibili_token:
