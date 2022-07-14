@@ -1,0 +1,24 @@
+name: Refresh Bilibili Token
+
+on:
+  workflow_dispatch
+
+jobs:
+  refresh_bilibili_token:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python3
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Refresh Bilibili Token
+        run: |
+          python scripts/bilibili-refresh_token.py
+        env:
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+          MONGO_URL: ${{ secrets.MONGO_URL }}
